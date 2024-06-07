@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form class="calculator-form">
+      <label for="vacancies"
+        >Estimated no. of Vacancies for the next 12 months:</label
+      >
+      <input id="vacancies" type="number" value="0" /><br />
+      <label for="grossSalaryAnnum"
+        >Estimated total Gross Salary per Annum:</label
+      >
+      <input
+        id="grossSalaryAnnum"
+        type="number"
+        value="0"
+        max="9999999999"
+      /><br />
+      <span id="grossSalaryAnnumValue">$0</span><br />
+      <label for="salary">Estimated total Gross Salary per Month:</label><br />
+      <span id="grossSalaryMonth">$0</span><br />
+      <label for="success">Talent Search Success Fee: </label><br />
+      <span id="talentSearchFee">$0</span><br />
+      <label for="partnership">Talent Partnership: $45,500.00</label><br />
+      <label>Savings: </label><span id="savings"></span><br />
+    </form>
+
+    <script>
+      const vacanciesInput = document.getElementById("vacancies");
+      const grossSalaryAnnumInput = document.getElementById("grossSalaryAnnum");
+      const grossSalaryAnnumValueSpan = document.getElementById(
+        "grossSalaryAnnumValue"
+      );
+      const grossSalaryMonthSpan = document.getElementById("grossSalaryMonth");
+      const talentSearchFeeSpan = document.getElementById("talentSearchFee");
+      const savingsSpan = document.getElementById("savings");
+
+      grossSalaryAnnumInput.addEventListener("input", (e) => {
+        const inputValue = e.target.value;
+        if (inputValue.length > 10) {
+          e.target.value = inputValue.slice(0, 10);
+        }
+        calculate();
+      });
+
+      function calculate() {
+        const grossSalaryAnnumInputValue = grossSalaryAnnumInput.value;
+        let grossSalaryAnnum = 0;
+        if (grossSalaryAnnumInputValue !== "") {
+          grossSalaryAnnum = parseInt(grossSalaryAnnumInputValue);
+        }
+        grossSalaryAnnumValueSpan.textContent = `$${grossSalaryAnnum.toLocaleString()}`;
+        const grossSalaryMonth = grossSalaryAnnum / 12;
+        const talentSearchFee = grossSalaryMonth * 2;
+        let savings = talentSearchFee - 45500;
+        if (savings > 45500) {
+          savings = 45500;
+        }
+
+        grossSalaryMonthSpan.textContent = `$${grossSalaryMonth.toFixed(2)}`;
+        talentSearchFeeSpan.textContent = `$${talentSearchFee.toFixed(2)}`;
+        savingsSpan.textContent = `$${savings.toFixed(2)}`.replace("$-", "-$");
+      }
+    </script>
+  </body>
+</html>
