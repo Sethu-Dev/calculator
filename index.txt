@@ -58,7 +58,7 @@
         const talentSearchFee = grossSalaryMonth * 2;
         let savings = talentSearchFee - 45500;
         if (savings > 45500) {
-          savings = 45500;
+          savings = 45,500;
         }
 
         grossSalaryMonthSpan.textContent = `$${grossSalaryMonth.toFixed(2)}`;
